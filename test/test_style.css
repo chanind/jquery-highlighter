@@ -3,6 +3,10 @@
 	padding: 10px;
 }
 
+.highlight {
+	background: rgb(152,193,119);
+}
+
 #status {
 	margin-top: 30px;
 }

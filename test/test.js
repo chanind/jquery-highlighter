@@ -14,7 +14,12 @@
     };
     $(document).on('mousemove', updateConsole);
     $(document).on('keypress', updateConsole);
-    return $(document).on('click', updateConsole);
+    $(document).on('click', updateConsole);
+    return $(document).on('click', '#mark-highlight', function() {
+      if (highlighter.containsSelection()) {
+        return highlighter.markHighlight(highlighter.getRelativeSelectionBounds());
+      }
+    });
   });
 
 }).call(this);

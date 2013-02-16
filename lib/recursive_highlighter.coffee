@@ -1,6 +1,8 @@
 class window.RecursiveHighlighter
 
-	options: {}
+	options:
+		highlightClass: 'highlight'
+		highlightTag: 'span'
 
 	constructor: (target, options = {}) ->
 		@$el = $(target)
@@ -70,16 +72,31 @@ class window.RecursiveHighlighter
 				return [$root.text().length, false]
 		return [numChars, false]
 
-
 	markHighlight: (relativeBounds) ->
+		domTree = @getFlattenedDomTree()
+		hlStart = relativeBounds[0]
+		hlEnd = relativeBounds[1]
+		inserting = false
+		nodeStart = 0
+		for node in domTree
+			nodeLength = $(node).text().length
+			nodeEnd = nodeLength + nodeStart
+			nodeRange = [nodeStart..nodeEnd]
+			if hlStart in nodeRange or hlEnd in nodeRange
+				nodeHlStart = Math.max(hlStart - nodeStart, 0)
+				nodeHlEnd = Math.min(hlEnd - nodeEnd, nodeLength)
+				@highlightInNode(node, [nodeHlStart, nodeHlEnd])
+			nodeStart = nodeEnd
+
+	highlightInNode: (node, bounds) ->
+		$node = $(node)
+		content = $node.text()
+		content = content[0...bounds[1]] + @getHlEndTag() + content[bounds[1]..-1]
+		content = content[0...bounds[0]] + @getHlStartTag() + content[bounds[0]..-1]
+		$node.parent().html(content)
+
+	getHlStartTag: -> "<#{@options.highlightTag} class='#{@options.highlightClass}'>"
+	getHlEndTag: -> "</#{@options.highlightTag}>"
 
 
 
-
-
-
-
-SelectionUtils =
-  hasSelection: ->
-    if @getRange() then true else false
-  getRange: ->
