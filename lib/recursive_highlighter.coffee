@@ -76,15 +76,16 @@ class window.RecursiveHighlighter
 		domTree = @getFlattenedDomTree()
 		hlStart = relativeBounds[0]
 		hlEnd = relativeBounds[1]
+		hlRange = [hlStart..hlEnd]
 		inserting = false
 		nodeStart = 0
 		for node in domTree
 			nodeLength = $(node).text().length
 			nodeEnd = nodeLength + nodeStart
 			nodeRange = [nodeStart..nodeEnd]
-			if hlStart in nodeRange or hlEnd in nodeRange
+			if nodeStart in hlRange or nodeEnd in hlRange or hlStart in nodeRange or hlEnd in nodeRange
 				nodeHlStart = Math.max(hlStart - nodeStart, 0)
-				nodeHlEnd = Math.min(hlEnd - nodeEnd, nodeLength)
+				nodeHlEnd = Math.min(hlEnd - nodeStart, nodeLength)
 				@highlightInNode(node, [nodeHlStart, nodeHlEnd])
 			nodeStart = nodeEnd
 
@@ -93,7 +94,12 @@ class window.RecursiveHighlighter
 		content = $node.text()
 		content = content[0...bounds[1]] + @getHlEndTag() + content[bounds[1]..-1]
 		content = content[0...bounds[0]] + @getHlStartTag() + content[bounds[0]..-1]
-		$node.parent().html(content)
+		if $node[0].nodeType == 3
+			$tempDiv = $('<div/>')
+			$tempDiv.html(content)
+			$node.replaceWith($tempDiv.contents())
+		else
+			$node.parent().html(content)
 
 	getHlStartTag: -> "<#{@options.highlightTag} class='#{@options.highlightClass}'>"
 	getHlEndTag: -> "</#{@options.highlightTag}>"

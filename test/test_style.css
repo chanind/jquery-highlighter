@@ -4,7 +4,7 @@
 }
 
 .highlight {
-	background: rgb(152,193,119);
+	background: rgba(152,193,119, 0.2);
 }
 
 #status {
