@@ -90,6 +90,7 @@ class window.RecursiveHighlighter
 			nodeStart = nodeEnd
 
 	highlightInNode: (node, bounds) ->
+		return if bounds[0] == bounds[1]
 		$node = $(node)
 		content = $node.text()
 		content = content[0...bounds[1]] + @getHlEndTag() + content[bounds[1]..-1]
