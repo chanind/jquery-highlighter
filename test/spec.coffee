@@ -6,7 +6,7 @@ fixtures =
 	tags: "this is some <b>text</b> to highlight"
 	nested: "this <span><b>is <br />some text <i>to</i><b></span> highlight"
 
-loadFixture: (fixture) -> $('#fixture').html(fixture)
+loadFixture = (fixture) -> $('#fixture').html(fixture)
 
 describe 'RecursiveHighlighter', ->
 	describe '#markHighlight', ->
