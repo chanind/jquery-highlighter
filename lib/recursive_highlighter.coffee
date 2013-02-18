@@ -1,4 +1,4 @@
-(($, undefined) ->
+(($) ->
 
 	class window.RecursiveHighlighter
 
