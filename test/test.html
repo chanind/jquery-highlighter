@@ -1,31 +1,24 @@
-<!DOCTYPE html>
 <html>
 	<head>
-		<title>Recursive Text Highlighter Test Page</title>
-		<link type="text/css" rel="stylesheet" href="test_style.css"></link>
-		<script type="text/javascript" src="../lib/jquery.js"></script>
-		<script type="text/javascript" src="../lib/recursive_highlighter.js"></script>
-		<script type="text/javascript" src="test.js"></script>
+		<title>Mocha</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="../vendor/mocha/mocha.css">
 	</head>
 	<body>
-		<h1>Some stuff to highlight:</h1>
+		<div id="mocha"></div>
+		<script src="../lib/jquery.js"></script>
+		<script src="../vendor/chai/chai.js"></script>
+		<script src="../vendor/mocha/mocha.js"></script>
+		<script>
+			mocha.setup('bdd');
+			window.should = chai.should();
+		</script>
+		<script src="../lib/recursive_highlighter.js"></script>
+		<script src="spec.js"></script>
+		<script>
+    		mocha.run();
+  		</script>
 
-		<div id="highlight-target">
-			<h2>Here is a sample document</h2>
-			<p>This is in a p tag</p>
-			<p> So is this</p>
-			<p>
-				Here is some <b> bold </b> text, and some <i> italic </i> text
-			</p>
-		</div>
-
-		<div id="status">
-			highlight present: 		<span id="highlight-present"></span><br />
-			highlight contained: 	<span id="highlight-contained"></span><br />
-			highlight start: 		<span id="highlight-start"></span><br />
-			highlight end: 			<span id="highlight-end"></span><br />
-
-			<button id="mark-highlight">Mark Highlight</button>
-		</div>
+ 		<div id="fixtures"></div>
 	</body>
 </html>
