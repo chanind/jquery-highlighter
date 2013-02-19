@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Recursive Text Highlighter Demo Page</title>
+		<link type="text/css" rel="stylesheet" href="style.css"></link>
+		<script type="text/javascript" src="../lib/jquery.js"></script>
+		<script type="text/javascript" src="../recursive_highlighter.js"></script>
+		<script type="text/javascript" src="demo.js"></script>
+	</head>
+	<body>
+		<h1>Some stuff to highlight below:</h1>
+
+		<div id="highlight-target">
+			<h2>Here is a sample document</h2>
+			<p>This is in a p tag</p>
+			<p> So is this</p>
+			<p> this contains escaped &lt;html&gt; tags </p>
+			<p> this contains a lot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of non-breaking spaces
+			<p>
+				Here is some <b> bold </b> text, and some <i> italic </i> text
+			</p>
+		</div>
+
+		<div id="status">
+			highlight present: 		<span id="highlight-present"></span><br />
+			highlight contained: 	<span id="highlight-contained"></span><br />
+			highlight start: 		<span id="highlight-start"></span><br />
+			highlight end: 			<span id="highlight-end"></span><br />
+
+			<button id="mark-highlight">Mark Highlight</button>
+		</div>
+	</body>
+</html>
