@@ -130,16 +130,24 @@
 				.replace(/'/g,"&#x27;")
 				.replace(/\//g,"&#x2F;")
 
+	findOrCreateHighlighter = (elm, options, forceRecreate = false) ->
+		highlighter = $.data(this, 'plugin_recursive_highlighter')
+		if forceRecreate or !highlighter
+			highlighter = new RecursiveHighlighter(this, options)
+		$.data(this, 'plugin_recursive_highlighter', highlighter)
+		highlighter
+
 	$.fn.highlighter = ->
 		args = Array.prototype.slice.apply(arguments)
 		options = args[-1] unless typeof args[-1] is 'string' or $.isArray(args[-1])
 		options ||= {}
-		highlighter = $.data(this, 'plugin_recursive_highlighter')
-		highlighter ||= new RecursiveHighlighter(this, options)
-		$.data(this, 'plugin_recursive_highlighter', highlighter)
 		if typeof args[0] is "string"
+			highlighter = findOrCreateHighlighter(this, options)
 			command = args[0]
 			return highlighter[command].apply(highlighter, args[1..-1])
+		else
+			findOrCreateHighlighter(this, options, true)
+
 
 )(jQuery)
 
