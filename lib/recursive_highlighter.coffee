@@ -98,8 +98,12 @@
 			return if bounds[0] == bounds[1]
 			$node = $(node)
 			content = $node.text()
-			content = content[0...bounds[1]] + @getHlEndTag() + content[bounds[1]..-1]
-			content = content[0...bounds[0]] + @getHlStartTag() + content[bounds[0]..-1]
+			content =
+				@htmlEscape(content[0...bounds[0]]) +
+				@getHlStartTag() +
+				@htmlEscape(content[bounds[0]...bounds[1]]) +
+				@getHlEndTag() +
+				@htmlEscape(content[bounds[1]..-1])
 			if $node[0].nodeType == 3
 				$tempDiv = $('<div/>')
 				$tempDiv.html(content)
@@ -110,15 +114,25 @@
 		getHlStartTag: -> "<#{@options.highlightTag} class='#{@options.highlightClass}'>"
 		getHlEndTag: -> "</#{@options.highlightTag}>"
 
+		htmlEscape: (str) ->
+			(""+str)
+				.replace(/&/g,"&amp;")
+				.replace(/</g,"&lt;")
+				.replace(/>/g,"&gt;")
+				.replace(/"/g,"&quot;")
+				.replace(/'/g,"&#x27;")
+				.replace(/\//g,"&#x2F;")
+
 	$.fn.highlighter = ->
-		options = arguments[-1] unless typeof arguments[-1] is 'string' or $.isArray(arguments[-1])
+		args = Array.prototype.slice.apply(arguments)
+		options = args[-1] unless typeof args[-1] is 'string' or $.isArray(args[-1])
 		options ||= {}
 		highlighter = $.data(this, 'plugin_recursive_highlighter')
 		highlighter ||= new RecursiveHighlighter(this, options)
 		$.data(this, 'plugin_recursive_highlighter', highlighter)
-		if typeof arguments[0] is "string"
-			command = arguments[0]
-			return highlighter[command].apply(highlighter, arguments[1..-1])
+		if typeof args[0] is "string"
+			command = args[0]
+			return highlighter[command].apply(highlighter, args[1..-1])
 
 )(jQuery)
 
