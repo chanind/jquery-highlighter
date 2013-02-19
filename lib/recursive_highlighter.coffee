@@ -26,6 +26,7 @@
 			hlRange = [hlStart..hlEnd]
 			inserting = false
 			nodeStart = 0
+			highlights = []
 			for node in domTree
 				nodeLength = $(node).text().length
 				nodeEnd = nodeLength + nodeStart
@@ -33,8 +34,9 @@
 				if nodeStart in hlRange or nodeEnd in hlRange or hlStart in nodeRange or hlEnd in nodeRange
 					nodeHlStart = Math.max(hlStart - nodeStart, 0)
 					nodeHlEnd = Math.min(hlEnd - nodeStart, nodeLength)
-					@highlightInNode(node, [nodeHlStart, nodeHlEnd])
+					highlights.push @highlightInNode(node, [nodeHlStart, nodeHlEnd])
 				nodeStart = nodeEnd
+			$(highlights)
 
 		selectionExists: -> if @getRange() then true else false
 
@@ -107,9 +109,14 @@
 			if $node[0].nodeType == 3
 				$tempDiv = $('<div/>')
 				$tempDiv.html(content)
-				$node.replaceWith($tempDiv.contents())
+				$nodes = $tempDiv.contents()
+				$node.replaceWith($nodes)
 			else
-				$node.parent().html(content)
+				$parent = $node.parent()
+				$parent.html(content)
+				$nodes = $parent.contents()
+			highlights = $nodes.filter (i, node) -> node.nodeType isnt 3
+			highlights[0]
 
 		getHlStartTag: -> "<#{@options.highlightTag} class='#{@options.highlightClass}'>"
 		getHlEndTag: -> "</#{@options.highlightTag}>"
