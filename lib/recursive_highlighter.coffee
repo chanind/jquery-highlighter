@@ -131,10 +131,10 @@
 				.replace(/\//g,"&#x2F;")
 
 	findOrCreateHighlighter = (elm, options, forceRecreate = false) ->
-		highlighter = $.data(this, 'plugin_recursive_highlighter')
+		highlighter = $.data(elm, 'plugin_recursive_highlighter')
 		if forceRecreate or !highlighter
-			highlighter = new RecursiveHighlighter(this, options)
-		$.data(this, 'plugin_recursive_highlighter', highlighter)
+			highlighter = new RecursiveHighlighter(elm, options)
+		$.data(elm, 'plugin_recursive_highlighter', highlighter)
 		highlighter
 
 	$.fn.highlighter = ->
