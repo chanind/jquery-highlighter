@@ -34,7 +34,8 @@
 				if nodeStart in hlRange or nodeEnd in hlRange or hlStart in nodeRange or hlEnd in nodeRange
 					nodeHlStart = Math.max(hlStart - nodeStart, 0)
 					nodeHlEnd = Math.min(hlEnd - nodeStart, nodeLength)
-					highlights.push @highlightInNode(node, [nodeHlStart, nodeHlEnd])
+					highlightEl = @highlightInNode(node, [nodeHlStart, nodeHlEnd])
+					highlights.push highlightEl if highlightEl
 				nodeStart = nodeEnd
 			$(highlights)
 
