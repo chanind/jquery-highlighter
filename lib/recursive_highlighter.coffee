@@ -140,7 +140,8 @@
 
 	$.fn.highlighter = ->
 		args = Array.prototype.slice.apply(arguments)
-		options = args[-1] unless typeof args[-1] is 'string' or $.isArray(args[-1])
+		lastArg = args[args.length - 1]
+		options = lastArg unless typeof lastArg is 'string' or $.isArray(lastArg)
 		options ||= {}
 		if typeof args[0] is "string"
 			highlighter = findOrCreateHighlighter(this, options)
