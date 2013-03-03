@@ -1,3 +1,4 @@
 stylus:
   compress: true
   path: ./path/to/styl
+baseurl: /jquery-highlighter
