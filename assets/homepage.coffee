@@ -11,18 +11,20 @@ class Homepage
 
 	constructor: ->
 		_.bindAll(@)
-		@currentRangeIndex = 0
+		@currentIndex = 0
+		@markAllHighlights()
 		@nextHighlight()
 		@highlightTimer = setInterval @nextHighlight, 3000
 
+	markAllHighlights: ->
+		@highlights = for range in @ranges
+			$('.lead').highlighter('markHighlight', range, {highlightClass: 'marker'})
+
 	nextHighlight: ->
-		range = @ranges[@currentRangeIndex]
 		$('.highlight').removeClass('highlight')
-		$lastHighlight = $('.lead').highlighter('markHighlight', range, {highlightClass: 'marker'})
-		setTimeout ->
-			$lastHighlight.addClass('highlight')
-		, 500
-		@currentRangeIndex += 1
-		@currentRangeIndex = 0 if @currentRangeIndex >= @ranges.length
+		$highlight = @highlights[@currentIndex]
+		$highlight.addClass('highlight')
+		@currentIndex += 1
+		@currentIndex = 0 if @currentIndex >= @ranges.length
 
 window.homepage = new Homepage()
