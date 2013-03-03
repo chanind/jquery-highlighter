@@ -7,3 +7,6 @@ body{padding-top:20px;padding-bottom:40px}
 p.lead{background:#eee;border-radius:10px;padding:20px;text-align:justify}
 .marketing{margin:60px 0}
 .marketing p + h4{margin-top:28px}
+.marker{background-color:rgba(0,136,204,0);-webkit-transition:background-color 300ms linear}
+-moz-transition background-color 300mslinear,-o-transition background-color 300mslinear,-ms-transition background-color 300mslinear{transition:background-color 300ms linear}
+.highlight{background-color:#08c;background-color:rgba(0,136,204,0.3)}

@@ -27,9 +27,9 @@
         <script type="text/javascript" src="/assets/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="/assets/underscore-min.js"></script>
         <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/assets/homepage.js"></script>
-        {% if js %}
-        <script type="text/javascript" src="{{ js }}"></script>
-        {% endif %}
-	</body>
+        <script type="text/javascript" src="/assets/recursive_highlighter.js"></script>
+        {% if page.js %}
+            <script type="text/javascript" src="/assets/{{ page.js }}"></script>
+	    {% endif %}
+    </body>
 </html>
