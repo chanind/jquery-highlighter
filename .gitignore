@@ -1,2 +1,2 @@
-*.js
+*/*.js
 .DS_STORE
