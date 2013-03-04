@@ -131,6 +131,16 @@
 				.replace(/'/g,"&#x27;")
 				.replace(/\//g,"&#x2F;")
 
+		# from http://stackoverflow.com/questions/3169786/clear-text-selection-with-javascript
+		clearSelection: ->
+			if window.getSelection
+				if window.getSelection().empty # Chrome
+			    	window.getSelection().empty()
+				else if window.getSelection().removeAllRanges # Firefox
+					window.getSelection().removeAllRanges()
+			else if document.selection # IE?
+				document.selection.empty()
+
 	findOrCreateHighlighter = (elm, options, forceRecreate = false) ->
 		highlighter = $.data(elm, 'plugin_recursive_highlighter')
 		if forceRecreate or !highlighter
