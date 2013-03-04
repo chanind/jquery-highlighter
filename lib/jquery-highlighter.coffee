@@ -57,6 +57,16 @@
 			endOffset = @getNumCharactersUntil(range.endContainer) + range.endOffset
 			return [startOffset, endOffset]
 
+		# from http://stackoverflow.com/questions/3169786/clear-text-selection-with-javascript
+		clearSelection: ->
+			if window.getSelection
+				if window.getSelection().empty # Chrome
+			    	window.getSelection().empty()
+				else if window.getSelection().removeAllRanges # Firefox
+					window.getSelection().removeAllRanges()
+			else if document.selection # IE?
+				document.selection.empty()
+
 		################### PRIVATE ########################
 
 		getNumCharactersUntil: (elm) ->
@@ -150,17 +160,5 @@
 		else
 			findOrCreateHighlighter(this, options, true)
 
-	# from http://stackoverflow.com/questions/3169786/clear-text-selection-with-javascript
-	$.clearSelection = ->
-		if window.getSelection
-			if window.getSelection().empty # Chrome
-		    	window.getSelection().empty()
-			else if window.getSelection().removeAllRanges # Firefox
-				window.getSelection().removeAllRanges()
-		else if document.selection # IE?
-			document.selection.empty()
-
 
 )(jQuery)
-
-
