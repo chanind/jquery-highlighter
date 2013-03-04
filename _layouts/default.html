@@ -8,19 +8,27 @@
 		<div class="container-narrow">
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Examples</a></li>
+                    <li {% if page.name == 'home' %}class="active"{% endif %}>
+                        <a href="/jquery-highlighter/index.html">Home</a>
+                    </li>
+                    <li {% if page.name == 'docs' %}class="active"{% endif %}>
+                        <a href="/jquery-highlighter/docs.html">Documentation</a>
+                    </li>
+                    <li {% if page.name == 'examples' %}class="active"{% endif %}>
+                        <a href="/jquery-highlighter/examples.html">Examples</a>
+                    </li>
                 </ul>
                 <h3 class="muted">JQuery Highlighter</h3>
             </div>
+
+            <hr/>
 
             {{ content }}
 
             <hr/>
 
             <div class="footer">
-                <p>&copy; Company 2013</p>
+
             </div>
 
         </div>

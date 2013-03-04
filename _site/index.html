@@ -8,20 +8,26 @@
 		<div class="container-narrow">
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Examples</a></li>
+                    <li class="active">
+                        <a href="/jquery-highlighter/index.html">Home</a>
+                    </li>
+                    <li >
+                        <a href="/jquery-highlighter/docs.html">Documentation</a>
+                    </li>
+                    <li >
+                        <a href="/jquery-highlighter/examples.html">Examples</a>
+                    </li>
                 </ul>
                 <h3 class="muted">JQuery Highlighter</h3>
             </div>
 
             <hr/>
 
-<div class="jumbotron">
+            <div class="jumbotron">
 <h1>HTML Highlighting Made Easy</h1>
 <p class="lead">
 	jquery-highlighter is an open source jquery plugin which lets you save and
-	recreate highlights on web pages using spans. Works across
+	draw highlights on web pages using spans. Works across
 	HTML elements like <b>this text in bold tags</b> and <i>this text in italics</i>
 </p>
 </div>
@@ -29,33 +35,46 @@
 <hr/>
 
 <div class="row-fluid marketing">
-	<div class="span6">
-		<h4>Subheading</h4>
-		<p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-		<h4>Subheading</h4>
-		<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-		<h4>Subheading</h4>
-		<p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-	</div>
-
-	<div class="span6">
-		<h4>Subheading</h4>
-		<p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-		<h4>Subheading</h4>
-		<p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-		<h4>Subheading</h4>
-		<p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+	<div class="span12">
+		<h4>Why does this exist?</h4>
+		<p>
+			Dealing with highlighting in browsers is diffucult. If you use the
+			built-in browser highlight to mark parts of the page, you can only
+			have 1 active highlight marked, and if the user clicks anywhere else
+			on the page the highlight disappears. In addition, there's no way to
+			add mouseover or other listeners to built-in browser. Furthermore,
+			the interface for dealing with and manipulating selections is
+			difficult to use.
+		</p>
+		<p>
+			Saving and drawing highlights using HTML is definitely the way to go,
+			but this, too, presents difficulties. HTML is a fundamentally a tree
+			structure where each element has exactly 1 parent. However, selections
+			break this structure because the user can select text which spans multiple
+			HTML elements, and may even end in the middle of an element.
+		</p>
+		<h4>What does jQuery-Highlighter do?</h4>
+		<p>
+			jQuery-highlighter handles all the complexity of marking and drawing
+			selections using HTML spans rather than the built-in highlighter. In
+			addition, it simplifies the interface to read in selection bounds by
+			returning a start index and end index of a selection relative to a
+			parent HTML element as if there were only flat text inside, regardless
+			of the complexity of the actual underlying HTML.
+		</p>
+		<h4>Next Steps</h4>
+		<p>
+			<a href="/jquery-highlighter/examples.html" class="btn btn-primary">Examples</a>
+			<a href="/jquery-highlighter/docs.html" class="btn btn-primary">Documentation</a>
+			<a href="https://github.com/chanind/jquery-highlighter" class="btn">Github Repo</a>
+		</p>
 	</div>
 </div>
 
             <hr/>
 
             <div class="footer">
-                <p>&copy; Company 2013</p>
+
             </div>
 
         </div>
