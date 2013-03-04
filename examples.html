@@ -7,38 +7,71 @@ js: examples.js
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#demo" data-toggle="tab">Demo</a></li>
-  <li><a href="#html" data-toggle="tab">HTML</a></li>
   <li><a href="#js" data-toggle="tab">Javascript</a></li>
 </ul>
 <div class="tab-content">
-	<div class="tab-pane active" id="demo">
-		<div id="highlight-target">
-			<h2>Try highlighting text in this box</h2>
-			<p>This is in a p tag</p>
-			<p> So is this</p>
-			<p> this contains escaped &lt;html&gt; tags </p>
-			<p> this contains a lot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of non-breaking spaces
-			<p>
-				Here is some <b> bold </b> text, and some <i> italic </i> text
-			</p>
-		</div>
+    <div class="tab-pane active" id="demo">
+        <div id="highlight-target">
+            <h2>Try highlighting text in this box</h2>
+            <p>This is in a p tag</p>
+            <p> So is this</p>
+            <p> this contains escaped &lt;html&gt; tags </p>
+            <p> this contains a lot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of non-breaking spaces
+            <p>
+                Here is some <b> bold </b> text, and some <i> italic </i> text
+            </p>
+        </div>
 
-		<div id="status">
-			highlight present: 		<span id="highlight-present"></span><br />
-			highlight contained: 	<span id="highlight-contained"></span><br />
-			highlight start: 		<span id="highlight-start"></span><br />
-			highlight end: 			<span id="highlight-end"></span><br />
+        <div id="status">
+            highlight present:      <span id="highlight-present"></span><br />
+            highlight contained:    <span id="highlight-contained"></span><br />
+            highlight start:        <span id="highlight-start"></span><br />
+            highlight end:          <span id="highlight-end"></span><br />
 
-			<button id="mark-highlight" class="btn btn-primary">Mark Highlight</button>
-			<button id="reset-highlight" class="btn">Reset</button>
-		</div>
-	</div>
-	<div class="tab-pane" id="html">
+            <button id="mark-highlight" class="btn btn-primary">Mark Highlight</button>
+            <button id="reset-highlight" class="btn">Reset</button>
+        </div>
+    </div>
+    <div class="tab-pane" id="js">
+{% highlight javascript %}
+$(function() {
+    // all of our highlighting will be relative to this div
+    var $el = $('#highlight-target');
+    // save the original HTML so we can reset the demo
+    var originalMarkup = $el.html();
 
-	</div>
-	<div class="tab-pane" id="javascript">
-		{% highlight javascript %}
-
-		{% endhighlight %}
-	</div>
+    var updateConsole = function() {
+        // $el.highlighter('selectionExists') tells us if anything is selected anywhere on the page
+        $('#highlight-present').text($el.highlighter('selectionExists') ? 'yes' : 'no');
+        // $el.highlighter('containsSelection') tells us if the selection is fully contained in the target el
+        $('#highlight-contained').text($el.highlighter('containsSelection') ? 'yes' : 'no');
+        // $el.highlighter('getRelativeSelectionBounds') tells us the start and end of the selection
+        // this returns the start and end ignoring all the markup contained
+        var bounds = $el.highlighter('getRelativeSelectionBounds');
+        var startOffset = bounds[0];
+        var endOffset = bounds[1];
+        $('#highlight-start').text(startOffset || '--');
+        $('#highlight-end').text(endOffset || '--');
+        $('#reset-highlight').click(function(e) {
+            e.preventDefault();
+            $el.html(originalMarkup);
+        });
+    };
+    $(document).on('mousemove', updateConsole);
+    $(document).on('keypress', updateConsole);
+    $(document).on('click', updateConsole);
+    $(document).on('click', '#mark-highlight', function(e) {
+        e.preventDefault();
+        if ($el.highlighter('containsSelection')) {
+            var bounds = $el.highlighter('getRelativeSelectionBounds');
+            // $el.highlighter('markHighlight') takes a given bounds and highlights it with spans
+            // this works well with getRelativeSelection to mark a selection using spans
+            $el.highlighter('markHighlight', bounds);
+            // clearSelection removes any native selections from the page
+            $(document).highlighter('clearSelection');
+        }
+    });
+});
+{% endhighlight %}
+    </div>
 </div>

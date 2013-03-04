@@ -3,7 +3,7 @@
 
   Homepage = (function() {
 
-    Homepage.prototype.ranges = [[27, 52], [68, 97], [152, 166], [180, 193]];
+    Homepage.prototype.ranges = [[27, 52], [68, 93], [148, 162], [176, 189]];
 
     function Homepage() {
       _.bindAll(this);
