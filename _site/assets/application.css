@@ -10,3 +10,5 @@ p.lead{background:#eee;border-radius:10px;padding:20px;text-align:justify}
 .marker{background-color:rgba(0,136,204,0);-webkit-transition:background-color 300ms linear}
 -moz-transition background-color 300mslinear,-o-transition background-color 300mslinear,-ms-transition background-color 300mslinear{transition:background-color 300ms linear}
 .highlight{background-color:#08c;background-color:rgba(0,136,204,0.3)}
+#highlight-target{border:1px solid #444;padding:10px}
+#status{margin-top:30px}

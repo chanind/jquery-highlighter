@@ -1,5 +1,44 @@
 ---
 layout: default
 name: examples
+js: examples.js
 ---
-<h1>Examples</h1>
+<h4>Example: Marking Highlights from User Selection</h4>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#demo" data-toggle="tab">Demo</a></li>
+  <li><a href="#html" data-toggle="tab">HTML</a></li>
+  <li><a href="#js" data-toggle="tab">Javascript</a></li>
+</ul>
+<div class="tab-content">
+	<div class="tab-pane active" id="demo">
+		<div id="highlight-target">
+			<h2>Try highlighting text in this box</h2>
+			<p>This is in a p tag</p>
+			<p> So is this</p>
+			<p> this contains escaped &lt;html&gt; tags </p>
+			<p> this contains a lot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of non-breaking spaces
+			<p>
+				Here is some <b> bold </b> text, and some <i> italic </i> text
+			</p>
+		</div>
+
+		<div id="status">
+			highlight present: 		<span id="highlight-present"></span><br />
+			highlight contained: 	<span id="highlight-contained"></span><br />
+			highlight start: 		<span id="highlight-start"></span><br />
+			highlight end: 			<span id="highlight-end"></span><br />
+
+			<button id="mark-highlight" class="btn btn-primary">Mark Highlight</button>
+			<button id="reset-highlight" class="btn">Reset</button>
+		</div>
+	</div>
+	<div class="tab-pane" id="html">
+
+	</div>
+	<div class="tab-pane" id="javascript">
+		{% highlight javascript %}
+
+		{% endhighlight %}
+	</div>
+</div>

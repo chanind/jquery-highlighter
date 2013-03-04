@@ -101,6 +101,18 @@
         return [startOffset, endOffset];
       };
 
+      RecursiveHighlighter.prototype.clearSelection = function() {
+        if (window.getSelection) {
+          if (window.getSelection().empty) {
+            return window.getSelection().empty();
+          } else if (window.getSelection().removeAllRanges) {
+            return window.getSelection().removeAllRanges();
+          }
+        } else if (document.selection) {
+          return document.selection.empty();
+        }
+      };
+
       RecursiveHighlighter.prototype.getNumCharactersUntil = function(elm) {
         var numChars, success, _ref;
         _ref = this.recurseGetNumCharsUntil(this.$el, elm), numChars = _ref[0], success = _ref[1];
